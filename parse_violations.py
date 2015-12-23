@@ -20,7 +20,6 @@ import csv
 import argparse
 import os
 
-
 FIELDS = ['ViolationID', 'BuildingID', 'RegistrationID', 'BoroName', 'Boro', 'HouseNumber', 'LowHouseNumber', 'HighHouseNumber', 'StreetName', 'StreetCode', 'Zip', 'Block', 'Lot', 'Class', 'InspectionDate', 'OriginalCertifyByDate', 'OriginalCorrectByDate', 'NewCertifyByDate', 'NewCorrectByDate', 'CertifiedDate', 'OrderNumber', 'NOVID', 'NOVDescription', 'NOVIssuedDate', 'GroupName', 'SeqNo', 'ShortName', 'LongName', 'Order', 'CurrentStatusDate']
 
 def write_headers(out_file):
@@ -65,6 +64,7 @@ def process_dir(INPUT_PATH, output_dir=None):
     for root, dirs, files in os.walk(INPUT_PATH):
         for file in files:
             file_ext = os.path.splitext(file)[1]
+            full_path = os.path.join(root, file)
             if file_ext == '.xml' or file_ext == '.XML':
                 # determine output path
                 if output_dir:
@@ -73,7 +73,7 @@ def process_dir(INPUT_PATH, output_dir=None):
                     csv_file_path = os.path.join(root, os.path.splitext(file)[0] + '.csv')
                 # process file
                 write_headers(csv_file_path)
-                XML_to_csv(file, csv_file_path)
+                XML_to_csv(full_path, csv_file_path)
             else:
                 pass # not a csv
 
