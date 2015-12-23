@@ -20,11 +20,11 @@ import csv
 import argparse
 import os
 
-FIELDS = ['ViolationID', 'BuildingID', 'RegistrationID', 'BoroName', 'Boro', 'HouseNumber', 'LowHouseNumber', 'HighHouseNumber', 'StreetName', 'StreetCode', 'Zip', 'Block', 'Lot', 'Class', 'InspectionDate', 'OriginalCertifyByDate', 'OriginalCorrectByDate', 'NewCertifyByDate', 'NewCorrectByDate', 'CertifiedDate', 'OrderNumber', 'NOVID', 'NOVDescription', 'NOVIssuedDate', 'GroupName', 'SeqNo', 'ShortName', 'LongName', 'Order', 'CurrentStatusDate']
+FIELDS = ['ViolationID', 'BuildingID', 'RegistrationID', 'BoroName', 'Boro', 'HouseNumber', 'LowHouseNumber', 'HighHouseNumber', 'StreetName', 'StreetCode', 'Zip', 'Apartment', 'Story', 'Block', 'Lot', 'Class', 'InspectionDate', 'ApprovedDate', 'OriginalCertifyByDate', 'OriginalCorrectByDate', 'NewCertifyByDate', 'NewCorrectByDate', 'CertifiedDate', 'OrderNumber', 'NOVID', 'NOVDescription', 'NOVIssuedDate', 'GroupName', 'SeqNo', 'ShortName', 'LongName', 'Order', 'CurrentStatusDate']
 
-def write_headers(out_file):
+def write_headers(out_file, fields=FIELDS):
     with open(out_file, 'a') as f:
-        writer = csv.DictWriter(f, fieldnames=FIELDS)
+        writer = csv.DictWriter(f, fieldnames=fields)
         writer.writeheader()  
 
 def parse_one_violation(one_violation, out_file):
@@ -74,6 +74,7 @@ def process_dir(INPUT_PATH, output_dir=None):
                 # process file
                 write_headers(csv_file_path)
                 XML_to_csv(full_path, csv_file_path)
+                print(file + " is done")
             else:
                 pass # not a csv
 
