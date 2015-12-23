@@ -6,7 +6,7 @@ The input can be a single xml file or a directory (and subdirectories) of files.
 
 HPD violation XML files can download from their website here: [HPD Open Data - Violations]( http://www1.nyc.gov/site/hpd/about/violation-open-data.page)
 
-IMPORTANT NOTE: for the xml files to work with this program they must be reprocessed to have each element on it's own line. This can be done with a simple perl script:
+IMPORTANT NOTE: For the xml files to work with this program they must be peprocessed to have each element on its own line. This can be done with a simple perl script:
 
 ``` bash
 perl -pe 's/></>\n</g' inputfile.xml > outputfile.xml
