@@ -18,23 +18,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import xml.etree.ElementTree as ET
 import csv
 import argparse
+import os
 
-parser = argparse.ArgumentParser(description='converts HPD violations data (XML format) into CSVs')
-parser.add_argument('input', help='input xml file')
-parser.add_argument('output', help='output file')
-args = parser.parse_args()
-
-PATH_TO_VIOLATIONS = args.input
-CSV_FILE_NAME = args.output
 
 FIELDS = ['ViolationID', 'BuildingID', 'RegistrationID', 'BoroName', 'Boro', 'HouseNumber', 'LowHouseNumber', 'HighHouseNumber', 'StreetName', 'StreetCode', 'Zip', 'Block', 'Lot', 'Class', 'InspectionDate', 'OriginalCertifyByDate', 'OriginalCorrectByDate', 'NewCertifyByDate', 'NewCorrectByDate', 'CertifiedDate', 'OrderNumber', 'NOVID', 'NOVDescription', 'NOVIssuedDate', 'GroupName', 'SeqNo', 'ShortName', 'LongName', 'Order', 'CurrentStatusDate']
 
-def write_headers():
-    with open(CSV_FILE_NAME, 'a') as f:
+def write_headers(out_file):
+    with open(out_file, 'a') as f:
         writer = csv.DictWriter(f, fieldnames=FIELDS)
         writer.writeheader()  
 
-def parse_one_violation(one_violation):
+def parse_one_violation(one_violation, out_file):
     root = ET.fromstring(one_violation)
     violation = {}
     # loop through to build dictionary
@@ -51,11 +45,11 @@ def parse_one_violation(one_violation):
     # All details of current status are extracted in the above loop statement
     del violation['CurrentStatus']
     # write csv
-    with open (CSV_FILE_NAME, 'a') as f:
+    with open (out_file, 'a') as f:
         writer = csv.DictWriter(f, fieldnames=FIELDS, delimiter='|')
         writer.writerow(violation)
 
-def XML_to_csv():
+def XML_to_csv(PATH_TO_VIOLATIONS, out_file):
     with open (PATH_TO_VIOLATIONS, 'r') as f:
         one_violation = ''
         for line in f:
@@ -63,11 +57,45 @@ def XML_to_csv():
                 one_violation = line
             elif line == '</Violation>\n':
                 one_violation += line
-                parse_one_violation(one_violation)
+                parse_one_violation(one_violation, out_file)
             else:
                 one_violation += line
 
+def process_dir(INPUT_PATH, output_dir=None):
+    for root, dirs, files in os.walk(INPUT_PATH):
+        for file in files:
+            file_ext = os.path.splitext(file)[1]
+            if file_ext == '.xml' or file_ext == '.XML':
+                # determine output path
+                if output_dir:
+                    csv_file_path = os.path.join(output_dir, os.path.splitext(file)[0] + '.csv')
+                else:
+                    csv_file_path = os.path.join(root, os.path.splitext(file)[0] + '.csv')
+                # process file
+                write_headers(csv_file_path)
+                XML_to_csv(file, csv_file_path)
+            else:
+                pass # not a csv
 
 if __name__ == "__main__":
-    write_headers()
-    XML_to_csv()
+    parser = argparse.ArgumentParser(description='converts HPD violations data (XML format) into CSVs')
+    parser.add_argument('input', help='input xml file or directory')
+    parser.add_argument('output', help='output file or output directory',nargs='?') 
+    args = parser.parse_args()
+
+    INPUT_PATH = args.input
+
+    if args.output:
+        CSV_FILE_NAME = args.output
+    else:
+        CSV_FILE_NAME = os.path.splitext(INPUT_PATH)[0] + '.csv'
+
+    file_ext = os.path.splitext(INPUT_PATH)[1]
+    
+    if file_ext == '.xml' or file_ext == '.XML':
+        write_headers(CSV_FILE_NAME)
+        XML_to_csv(INPUT_PATH, CSV_FILE_NAME)
+    elif file_ext == '':
+        process_dir(INPUT_PATH, args.output);
+    else:
+        print('INPUT is not an xml file or a directory')
