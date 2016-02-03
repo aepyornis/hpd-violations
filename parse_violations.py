@@ -24,7 +24,7 @@ FIELDS = ['ViolationID', 'BuildingID', 'RegistrationID', 'BoroName', 'Boro', 'Ho
 
 def write_headers(out_file, fields=FIELDS):
     with open(out_file, 'a') as f:
-        writer = csv.DictWriter(f, fieldnames=fields)
+        writer = csv.DictWriter(f, delimiter='|', fieldnames=fields)
         writer.writeheader()  
 
 def parse_one_violation(one_violation, out_file):
