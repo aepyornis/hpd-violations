@@ -1,4 +1,4 @@
-create table if not exists violations (
+create table if not exists hpd.violations (
 
        ViolationID integer,
        BuildingID integer,
