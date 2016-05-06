@@ -1,13 +1,19 @@
 #!/bin/bash
-# use: export HPD_VIOLATIONS_DATA_DIR=/path/to/processed/csvs/folder; to_postgres.sh
 
-psql -d hpd -f violations_schema.sql 
+DB="hpd_violations"
 
-for file in $(ls ${HPD_VIOLATIONS_DATA_DIR}*.csv); do
-    printf "copying ${file}\n"
-    command="copy hpd.violations from '${file}' WITH (FORMAT CSV, HEADER true, NULL '', DELIMITER '|');"
-    echo ${command} | psql hpd
+psql -d ${DB} -f schema.sql
+
+for year in 2015 2016; do
+    cd $year
+    for f in *.txt; do
+        printf "copying "${year}"/"${f}"\n"
+        cat ${f} |
+            sed 's/"//g' |   # DoubleQuotes just mess things up
+            psql -d ${DB} -c "COPY violations from STDIN (DELIMITER '|', FORMAT CSV, HEADER TRUE);"
+    done
+    cd ..
 done
 
 printf "Adding bbl column, id, and indexing\n"
-psql -d hpd -f index.sql
+psql -d ${DB} -f index.sql
