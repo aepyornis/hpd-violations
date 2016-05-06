@@ -15,5 +15,5 @@ for year in 2015 2016; do
     cd ..
 done
 
-printf "Adding bbl column, id, and indexing\n"
-psql -d ${DB} -f index.sql
+printf "Adding columns -- bbl, lat, lng, id -- and indexing\n"
+psql -d ${DB} -f process_violations_table.sql
