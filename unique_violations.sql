@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS uniq_violations;
 create table uniq_violations as (
        select distinct on(v1.violationid) v1.violationid,
                 v1.buildingid,
+                v1.registrationid,
                 v1.housenumber,
                 v1.streetname,
                 v1.apartment,
@@ -40,5 +41,17 @@ create table uniq_violations as (
 );
 
 ALTER TABLE uniq_violations ADD PRIMARY KEY (violationid);
+
+COMMIT;
+
+BEGIN;
+
+CREATE INDEX on uniq_violations(bbl);
+CREATE INDEX on uniq_violations(registrationid);
+CREATE INDEX on uniq_violations(violationclass);
+CREATE INDEX on uniq_violations(inspectiondate);
+CREATE INDEX on uniq_violations(CertifiedDate);
+CREATE INDEX on uniq_violations(CurrentStatusID);
+CREATE INDEX on uniq_violations(CurrentStatusDate);
 
 COMMIT;
