@@ -38,3 +38,4 @@ CREATE INDEX on violations(inspectiondate);
 CREATE INDEX on violations(CertifiedDate);
 CREATE INDEX on violations(CurrentStatusID);
 CREATE INDEX on violations(CurrentStatusDate);
+CREATE INDEX on violations (currentstatusdate, violationid);
