@@ -2,7 +2,7 @@
 
 DB="hpd_violations"
 
-psql -d ${DB} -f schema.sql
+psql -d ${DB} -f sql/schema.sql
 
 for year in 2015 2016; do
     cd $year
@@ -16,4 +16,7 @@ for year in 2015 2016; do
 done
 
 printf "Adding columns -- bbl, lat, lng, id -- and indexing\n"
-psql -d ${DB} -f process_violations_table.sql
+psql -d ${DB} -f sql/process_violations_table.sql
+
+printf "Creating the uniq_violations table\n"
+psql -d ${DB} -f sql/unique_violations.sql 
