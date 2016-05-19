@@ -21,6 +21,7 @@ create table uniq_violations as (
                 v1.newcertifybydate,
                 v1.newcorrectbydate,
                 v1.certifieddate,
+                v1.novdescription,
                 v1.currentstatusid,
                 v1.currentstatus,
                 v1.currentstatusdate,
