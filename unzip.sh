@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+cd data/
+
+unzip *.zip
+
 for i in 2015 2016; do
     cd $i
     for zipfile in *.zip; do
@@ -9,3 +13,5 @@ for i in 2015 2016; do
     rm *.xml
     cd ..
 done
+
+cd ..

@@ -5,14 +5,16 @@
 ###
 
 # 2016
+mkdir -p data
+cd data
 mkdir -p 2016
 cd 2016
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20160201.zip
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20160301.zip
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20160401.zip
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20160501.zip
-
 cd ..
+
 mkdir -p 2015
 cd 2015
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20150201.zip
@@ -27,3 +29,10 @@ wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20151001.zip
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20151101.zip
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20151201.zip
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20160101.zip
+cd ..
+
+# Download open violations :
+
+wget https://www1.nyc.gov/assets/hpd/downloads/misc/AllOpenViolations20160501.zip
+
+cd ..
