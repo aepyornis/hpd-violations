@@ -6,7 +6,7 @@
 
 # 2016
 mkdir -p data
-cd datan
+cd data
 mkdir -p 2016
 cd 2016
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20160201.zip
