@@ -13,7 +13,7 @@
 ############################################
 
 DB="hpd_violations"
-open_violations_file="data/Violation20160430.txt"
+open_violations_file="data/Violation20160731.txt"
 
 printf "Creating the violations table\n"
 psql -d ${DB} -f sql/schema.sql

@@ -44,3 +44,19 @@ IMPORTANT NOTE: For the xml files to work with this program they must be pre-pro
 perl -pe 's/></>\n</g' inputfile.xml > outputfile.xml
 ```
 
+#### MSC. Useful Commands
+
+*DB DUMP:* ``` pg_dump --no-owner -Fc -t all_violations hpd_violations > all_violations.dump ```
+
+*DB restore:* ``` pg_restore --clean -d hpd_violations all_violations.dump ```
+
+*Grant privileges*:
+
+``` sh
+psql -d hpd_violations -c "GRANT USAGE ON SCHEMA public TO hpdserver"
+psql -d hpd_violations -c "GRANT SELECT ON ALL TABLES IN SCHEMA public TO hpdserver"
+
+```
+
+*clear ngnix cache* : ``` find /data/nginx/cache/ -type f -delete ```
+
