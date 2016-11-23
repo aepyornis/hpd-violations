@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###
-# Downloads HPD's violation data files for 2015 and Jan-July of 2016
+# Downloads HPD's violation data files for 2015 and Jan-Oct of 2016
 ###
 
 # 2016
@@ -9,6 +9,7 @@ mkdir -p data
 cd data
 mkdir -p 2016
 cd 2016
+
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20160201.zip
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20160301.zip
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20160401.zip
@@ -16,7 +17,9 @@ wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20160501.zip
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20160601.zip
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20160701.zip
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20160801.zip
-
+wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20160901.zip
+wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20161001.zip
+wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20161101.zip
 cd ..
 
 mkdir -p 2015
@@ -36,7 +39,6 @@ wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20160101.zip
 cd ..
 
 # Download open violations :
-
-wget http://www1.nyc.gov/assets/hpd/downloads/misc/AllOpenViolations20160801.zip
+wget http://www1.nyc.gov/assets/hpd/downloads/misc/AllOpenViolations20161101.zip
 
 cd ..
