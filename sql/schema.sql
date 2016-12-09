@@ -13,7 +13,7 @@ create table violations (
   HighHouseNumber text,
   StreetName text,
   StreetCode integer,
-  Zip char(5),
+  Zip text,
   Apartment text,
   Story text,
   Block integer,
