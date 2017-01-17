@@ -21,6 +21,7 @@ wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20160901.zip
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20161001.zip
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20161101.zip
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20161201.zip
+wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20170101.zip
 cd ..
 
 mkdir -p 2015
