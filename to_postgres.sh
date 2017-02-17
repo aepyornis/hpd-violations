@@ -36,6 +36,9 @@ done
 
 cd $pwd
 
+printf "Adding column bbl to violations\n"
+execute_sql sql/add_bbl_to_violations.sql
+
 printf "Creating the uniq_violations table\n"
 execute_sql sql/unique_violations.sql
 
