@@ -1,7 +1,9 @@
 #!/bin/bash
 set -e
 
-cd data/
+source ./pg_setup.sh
+
+cd ${HPD_VIOLATIONS_DATA_FOLDER:-data}
 
 # unzip the All Open Violationz zip file
 unzip *.zip
