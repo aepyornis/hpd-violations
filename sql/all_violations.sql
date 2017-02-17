@@ -22,9 +22,7 @@ create table all_violations as (
               currentstatusid,       
               currentstatus,         
               currentstatusdate,     
-              bbl,                   
-              lat,                   
-              lng                   
+              bbl
        FROM open_violations 
 );
 

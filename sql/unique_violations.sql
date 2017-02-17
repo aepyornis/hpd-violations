@@ -26,8 +26,6 @@ create table uniq_violations as (
                 v1.currentstatus,
                 v1.currentstatusdate,
                 v1.bbl,
-                v1.lat,
-                v1.lng,
                 v2.records
        from violations as v1
        inner join (

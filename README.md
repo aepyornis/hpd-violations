@@ -1,7 +1,21 @@
 # HPD Violations
 Creates a postgres database of housing violations in New York City. The Department of Housing, Preservation, and Development (HPD) releases every month a [dataset of all housing violations](https://www1.nyc.gov/site/hpd/about/open-data.page) they have issued. This code turns those CSV into a useful database. 
 
-To build a database of hpd violations since 2015, run the following scripts:
+To build a database of hpd violations since 2015 create a file 'pg_setup.sh' contains two bash functions that excues postgres commands. Example:
+
+``` bash
+export PGPASSWORD=YOURPGPASSWORD
+
+execute_sql () {
+ psql -h 127.0.0.1 -d nycdb -U postgres -f $1
+}
+
+execute_sql_cmd () {
+ psql -h 127.0.0.1 -d nycdb -U postgres --command "$1"
+}
+```
+
+Then run the following scripts:
 
 ``` bash
 # Downloads all the data
@@ -11,6 +25,8 @@ To build a database of hpd violations since 2015, run the following scripts:
 # Inserts the data into postgres
 ./to_postgres.sh
 ```
+
+
 
 This will produce 4 tables:
 
