@@ -5,3 +5,4 @@ UPDATE open_violations SET bbl = boroid || lpad(cast(block as text), 5, '0') || 
 
 COMMIT;
 
+CREATE INDEX on open_violations(bbl);
