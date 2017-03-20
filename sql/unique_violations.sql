@@ -41,4 +41,4 @@ create table uniq_violations as (
 
 COMMIT;
 
-CREATE INDEX on unique_violations(bbl);
+CREATE INDEX on uniq_violations(bbl);
