@@ -57,4 +57,13 @@ execute_sql sql/process_open_violations.sql
 printf "Creating the all_violations table\n"
 execute_sql sql/all_violations.sql
 
+if [[ $(execute_sql_cmd "SELECT EXISTS(SELECT 1 FROM information_schema.tables where table_name = 'pluto_16v2')" | sed -n '3p' | grep t) ]]
+then
+    printf 'Adding lat and lng to the all_violations table from pluto 16v2\n'
+    execute_sql sql/add_lat_lng.sql
+else
+    printf 'Table pluto 16v2 is missing!\n'
+    printf 'Skipping Lat & Lng for now\n'
+fi
+
 # printf "There are "$(psql -At -d hpd_violations -c "SELECT COUNT(*) from all_violations")" rows in the all_violations table\n"

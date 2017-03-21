@@ -1,5 +1,3 @@
-BEGIN;
-
 DROP TABLE if exists all_violations;
 
 -- create all_violations which initially contains everything from the open violations table
@@ -53,7 +51,10 @@ insert into all_violations (
 
 ALTER TABLE all_violations ADD PRIMARY KEY (violationid);
 
-COMMIT;
+-- Add Lat & Lng Columns
+ALTER TABLE all_violations ADD COLUMN lat numeric;
+ALTER TABLE all_violations ADD COLUMN lng numeric;
+
 
 CREATE INDEX on all_violations(bbl);
 CREATE INDEX on all_violations(datasource);
