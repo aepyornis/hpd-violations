@@ -40,7 +40,7 @@ ALTER TABLE uniq_violations ADD COLUMN datasource char(1);
 UPDATE uniq_violations SET datasource = 'R';
 
 -- insert those records of uniq_violations into all_violations
--- only if the violationid does not already exists in the open_violations data
+-- only if the violationid does not already exist in the open_violations data
 insert into all_violations (
        select uniq_violations.* 
        from uniq_violations
@@ -50,18 +50,3 @@ insert into all_violations (
 );
 
 ALTER TABLE all_violations ADD PRIMARY KEY (violationid);
-
--- Add Lat & Lng Columns
-ALTER TABLE all_violations ADD COLUMN lat numeric;
-ALTER TABLE all_violations ADD COLUMN lng numeric;
-
-
-CREATE INDEX on all_violations(bbl);
-CREATE INDEX on all_violations(datasource);
-CREATE INDEX on all_violations(registrationid);
-CREATE INDEX on all_violations(violationclass);
-CREATE INDEX on all_violations(inspectiondate);
-CREATE INDEX on all_violations(CertifiedDate);
-CREATE INDEX on all_violations(CurrentStatusID);
-CREATE INDEX on all_violations(CurrentStatusDate);
-CREATE INDEX on all_violations(currentstatusdate, violationid);

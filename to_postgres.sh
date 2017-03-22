@@ -66,4 +66,5 @@ else
     printf 'Skipping Lat & Lng for now\n'
 fi
 
-# printf "There are "$(psql -At -d hpd_violations -c "SELECT COUNT(*) from all_violations")" rows in the all_violations table\n"
+printf "Indexing the all_violations table\n"
+execute_sql sql/index_all_violations.sql
