@@ -12,6 +12,7 @@ cd 2017
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20170201.zip
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20170301.zip
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20170401.zip
+wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20170501.zip
 cd ..
 
 # 2016
@@ -49,5 +50,5 @@ wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20160101.zip
 cd ..
 
 # Download open violations :
-wget http://www1.nyc.gov/assets/hpd/downloads/misc/AllOpenViolations20170403.zip
+wget http://www1.nyc.gov/assets/hpd/downloads/misc/AllOpenViolation20170501.zip
 cd ..
