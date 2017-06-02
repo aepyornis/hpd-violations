@@ -29,7 +29,7 @@ for year in 2015 2016 2017; do
         printf "copying "${year}"/"${f}"\n"
         cat ${f} |
             sed 's/"//g' |   # DoubleQuotes just mess things up
-            execute_sql_cmd "COPY violations from STDIN (DELIMITER '|', FORMAT CSV, HEADER TRUE);"
+            execute_sql_cmd "COPY hpd_violations from STDIN (DELIMITER '|', FORMAT CSV, HEADER TRUE);"
     done
     cd ..
 done
@@ -49,9 +49,9 @@ printf "Copying data from "${HPD_VIOLATIONS_DATA_FOLDER:-data}"/AllOpenViolation
 
 cat ${HPD_VIOLATIONS_DATA_FOLDER:-data}/AllOpenViolations.txt |
     sed 's/"//g' |
-    execute_sql_cmd "COPY open_violations from STDIN (DELIMITER '|', FORMAT CSV, HEADER TRUE);"
+    execute_sql_cmd "COPY hpd_open_violations from STDIN (DELIMITER '|', FORMAT CSV, HEADER TRUE);"
 
-printf "Adding columns bbl to open_violations\n"
+printf "Adding columns bbl to hpd_open_violations\n"
 execute_sql sql/process_open_violations.sql
 
 printf "Creating the all_violations table\n"
