@@ -1,7 +1,7 @@
-DROP TABLE if exists all_violations;
+DROP TABLE if exists hpd_all_violations;
 
 -- create all_violations which initially contains everything from the open violations table
-create table all_violations as (
+create table hpd_all_violations as (
        select violationid,          
               buildingid,            
               registrationid,        
@@ -21,32 +21,32 @@ create table all_violations as (
               currentstatus,         
               currentstatusdate,     
               bbl
-       FROM open_violations 
+       FROM hpd_open_violations 
 );
 
 -- add the 'records' columns that exists in the uniq_violations table
-ALTER TABLE all_violations ADD COLUMN records int;
+ALTER TABLE hpd_all_violations ADD COLUMN records int;
 -- since there is only one entry per violation in the open violations data all rows should have records = 1
-UPDATE all_violations set records = 1;
+UPDATE hpd_all_violations set records = 1;
 -- add unique constraint to ensure that there is no duplicate violations
-ALTER TABLE all_violations ADD UNIQUE (violationid);
+ALTER TABLE hpd_all_violations ADD UNIQUE (violationid);
 
 --Add datasource column to both open violations and uniq_violations;
 -- 'O' -> All Open Violations
 -- 'R' -> 'Regular' violations data
-ALTER TABLE all_violations ADD COLUMN datasource char(1);
-UPDATE all_violations SET datasource = 'O';
-ALTER TABLE uniq_violations ADD COLUMN datasource char(1);
-UPDATE uniq_violations SET datasource = 'R';
+ALTER TABLE hpd_all_violations ADD COLUMN datasource char(1);
+UPDATE hpd_all_violations SET datasource = 'O';
+ALTER TABLE hpd_uniq_violations ADD COLUMN datasource char(1);
+UPDATE hpd_uniq_violations SET datasource = 'R';
 
 -- insert those records of uniq_violations into all_violations
 -- only if the violationid does not already exist in the open_violations data
-insert into all_violations (
-       select uniq_violations.* 
-       from uniq_violations
-       left join open_violations
-       on uniq_violations.violationid = open_violations.violationid
-       where open_violations.violationid is null
+insert into hpd_all_violations (
+       select hpd_uniq_violations.* 
+       from hpd_uniq_violations
+       left join hpd_open_violations
+       on hpd_uniq_violations.violationid = hpd_open_violations.violationid
+       where hpd_open_violations.violationid is null
 );
 
-ALTER TABLE all_violations ADD PRIMARY KEY (violationid);
+ALTER TABLE hpd_all_violations ADD PRIMARY KEY (violationid);

@@ -1,8 +1,8 @@
 BEGIN;
 
-drop table if exists violations;
+drop table if exists hpd_violations;
 
-create table violations (
+create table hpd_violations (
   ViolationID integer,
   BuildingID integer,
   RegistrationID integer,

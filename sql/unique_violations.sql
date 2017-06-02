@@ -1,12 +1,12 @@
 BEGIN;
 
-DROP TABLE IF EXISTS uniq_violations;
+DROP TABLE IF EXISTS hpd_uniq_violations;
 
 -- Using "distinct on (violationid)" results in a set with one less row than without.
 -- There is (at least with the data through April 2016) one violationid with two entrees 
 -- for the same currentstatusdate, which is probably a mistake.
 
-create table uniq_violations as (
+create table hpd_uniq_violations as (
        select distinct on(v1.violationid) v1.violationid,
                 v1.buildingid,
                 v1.registrationid,
@@ -27,12 +27,12 @@ create table uniq_violations as (
                 v1.currentstatusdate,
                 v1.bbl,
                 v2.records
-       from violations as v1
+       from hpd_violations as v1
        inner join (
              select Max(currentstatusdate) as currentstatusdate, 
                     count(violationid) as records, 
                     violationid
-             from violations
+             from hpd_violations
              group by violationid       
        ) as v2
        on v1.violationid = v2.violationid
@@ -41,4 +41,4 @@ create table uniq_violations as (
 
 COMMIT;
 
-CREATE INDEX on uniq_violations(bbl);
+CREATE INDEX on hpd_uniq_violations(bbl);
