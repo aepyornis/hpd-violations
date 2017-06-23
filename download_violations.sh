@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###
-# Downloads HPD's violation data files for 2015, 2016, & Jan-March 2017
+# Downloads HPD's violation data files for 2015, 2016, & Jan-May 2017
 #
 mkdir -p data
 cd data
@@ -13,6 +13,7 @@ wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20170201.zip
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20170301.zip
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20170401.zip
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20170501.zip
+wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20170601.zip
 cd ..
 
 # 2016
