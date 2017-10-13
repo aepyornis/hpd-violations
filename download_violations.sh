@@ -16,6 +16,7 @@ wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20170501.zip
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20170601.zip
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20170701.zip
 wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violations20170801.zip
+wget http://www1.nyc.gov/assets/hpd/downloads/misc/Violation20170901.zip
 cd ..
 
 # 2016
